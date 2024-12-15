@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Expense Map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <style>
+        /* loader */
+            .loader {
+                transform: rotateZ(45deg);
+                perspective: 1000px;
+                border-radius: 50%;
+                width: 80px;
+                height: 80px;
+                /* color: #fff; */
+                color: #000000;
+            }
+
+            .loader:before,
+            .loader:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: inherit;
+                height: inherit;
+                border-radius: 50%;
+                transform: rotateX(70deg);
+                animation: 1s spin linear infinite;
+            }
+
+            .loader:after {
+                /* color: #f8d40a; */
+                color: #0dd117;
+                transform: rotateY(70deg);
+                animation-delay: .4s;
+            }
+
+            @keyframes rotate {
+                0% {
+                    transform: translate(-50%, -50%) rotateZ(0deg);
+                }
+
+                100% {
+                    transform: translate(-50%, -50%) rotateZ(360deg);
+                }
+            }
+
+            @keyframes rotateccw {
+                0% {
+                    transform: translate(-50%, -50%) rotate(0deg);
+                }
+
+                100% {
+                    transform: translate(-50%, -50%) rotate(-360deg);
+                }
+            }
+
+            @keyframes spin {
+
+                0%,
+                100% {
+                    box-shadow: .2em 0px 0 0px currentcolor;
+                }
+
+                12% {
+                    box-shadow: .2em .2em 0 0 currentcolor;
+                }
+
+                25% {
+                    box-shadow: 0 .2em 0 0px currentcolor;
+                }
+
+                37% {
+                    box-shadow: -.2em .2em 0 0 currentcolor;
+                }
+
+                50% {
+                    box-shadow: -.2em 0 0 0 currentcolor;
+                }
+
+                62% {
+                    box-shadow: -.2em -.2em 0 0 currentcolor;
+                }
+
+                75% {
+                    box-shadow: 0px -.2em 0 0 currentcolor;
+                }
+
+                87% {
+                    box-shadow: .2em -.2em 0 0 currentcolor;
+                }
+            }
+    </style>
+
+
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen" onload='LoaderFunction()'>
+
+    <!-- loader -->
+    <div class="fixed inset-0 z-10 flex items-center justify-center bg-transparent backdrop-blur-lg"
+    id="loader-container">
+    <div class="loader">
+        <span class="loader"></span>
+    </div>
+    </div>
+    <!-- loader -->
+
+
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+    <h2 class="text-2xl font-bold text-center mb-5">Expense Map</h2>
+    <form action="#" method="POST">
+      <div class="mb-4">
+        <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your username"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+          required
+        />
+      </div>
+      <div class="mb-4">
+        <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:outline-none"
+          required
+        />
+      </div>
+      <div class="mb-4 flex items-center justify-between">
+        <label class="flex items-center">
+          <!-- <input type="checkbox" class="h-4 w-4 text-green-500 rounded">
+          <span class="ml-2 text-gray-600 text-sm">Remember Me</span> -->
+        </label>
+        <a href="#" class="text-sm text-green-500 hover:underline">Forgot Password?</a>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:ring-2 focus:ring-green-400 focus:outline-none"
+      >
+        Login
+      </button>
+    </form>
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Don't have an account? 
+      <a href="#" class="text-green-500 font-medium hover:underline">Sign up</a>
+    </p>
+  </div>
+
+
+
+
+{% if messages %}
+  <script>
+    {% for message in messages %}
+        Swal.fire({
+            icon: "{{ message.tags }}", 
+            text: "{{ message }}", 
+        });
+    {% endfor %}
+  </script>
+{% endif %}
+
+
+
+
+
+
+  <script>
+    // loader
+    document.addEventListener('DOMContentLoaded', function () {
+        const preloader = document.getElementById('loader-container');
+        function LoaderFunction() {
+            setTimeout(function () {
+                preloader.style.display = 'none';
+            }, 500);
+        }
+
+        window.addEventListener('load', function () {
+            LoaderFunction();
+        });
+    });
+    // loader end
+</script>
+
+
+</body>
+</html>
